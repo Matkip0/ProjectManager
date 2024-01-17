@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 
 //seedTasks();
+//seedWorkers();
 
 using (ProjectManagerContext context = new())
 {
@@ -20,7 +21,6 @@ using (ProjectManagerContext context = new())
 
 printIncompleteTasksAndTodos();
 
-seedWorkers();
 
     //static void Blogging() 
     //{ 

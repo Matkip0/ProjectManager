@@ -76,13 +76,17 @@ namespace ProjectManager
         public int TeamID { get; set; }
         public string Name { get; set; }
         public List<TeamWorker> Workers { get; set; }
+        public Task CurrentTask { get; set; }
+        public List<Task> Tasks { get; set; }
     }
 
     public class Worker
     {
         public int WorkerID { get; set; }
         public string Name { get; set; }
-        public List<TeamWorker> Teams {  get; set; } 
+        public List<TeamWorker> Teams {  get; set; }
+        public Todo CurrentTodo { get; set; }
+        public List<Todo> Todos { get; set; }
     }
 
     public class TeamWorker
