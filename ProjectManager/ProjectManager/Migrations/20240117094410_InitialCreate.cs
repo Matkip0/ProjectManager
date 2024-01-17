@@ -11,53 +11,52 @@ namespace ProjectManager.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Blogs",
+                name: "Task",
                 columns: table => new
                 {
-                    BlogId = table.Column<int>(type: "INTEGER", nullable: false)
+                    TaskId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Blogs", x => x.BlogId);
+                    table.PrimaryKey("PK_Task", x => x.TaskId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Posts",
+                name: "Todo",
                 columns: table => new
                 {
-                    PostId = table.Column<int>(type: "INTEGER", nullable: false)
+                    TodoID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
-                    Content = table.Column<string>(type: "TEXT", nullable: false),
-                    BlogId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    IsComplete = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TaskId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Posts", x => x.PostId);
+                    table.PrimaryKey("PK_Todo", x => x.TodoID);
                     table.ForeignKey(
-                        name: "FK_Posts_Blogs_BlogId",
-                        column: x => x.BlogId,
-                        principalTable: "Blogs",
-                        principalColumn: "BlogId",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Todo_Task_TaskId",
+                        column: x => x.TaskId,
+                        principalTable: "Task",
+                        principalColumn: "TaskId");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_BlogId",
-                table: "Posts",
-                column: "BlogId");
+                name: "IX_Todo_TaskId",
+                table: "Todo",
+                column: "TaskId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "Todo");
 
             migrationBuilder.DropTable(
-                name: "Blogs");
+                name: "Task");
         }
     }
 }
