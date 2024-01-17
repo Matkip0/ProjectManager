@@ -18,36 +18,38 @@ using (ProjectManagerContext context = new())
     }
 }
 
+printIncompleteTasksAndTodos();
+
     //static void Blogging() 
     //{ 
     //    using var db = new BloggingContext();
 
-    //    // Note: This sample requires the database to be created before running.
-    //    Console.WriteLine($"Database path: {db.DbPath}.");
+//    // Note: This sample requires the database to be created before running.
+//    Console.WriteLine($"Database path: {db.DbPath}.");
 
-    //    // Create
-    //    Console.WriteLine("Inserting a new blog");
-    //    db.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
-    //    db.SaveChanges();
+//    // Create
+//    Console.WriteLine("Inserting a new blog");
+//    db.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
+//    db.SaveChanges();
 
-    //    // Read
-    //    Console.WriteLine("Querying for a blog");
-    //    var blog = db.Blogs
-    //        .OrderBy(b => b.BlogId)
-    //        .First();
+//    // Read
+//    Console.WriteLine("Querying for a blog");
+//    var blog = db.Blogs
+//        .OrderBy(b => b.BlogId)
+//        .First();
 
-    //    // Update
-    //    Console.WriteLine("Updating the blog and adding a post");
-    //    blog.Url = "https://devblogs.microsoft.com/dotnet";
-    //    blog.Posts.Add(
-    //        new Post { Title = "Hello World", Content = "I wrote an app using EF Core!" });
-    //    db.SaveChanges();
+//    // Update
+//    Console.WriteLine("Updating the blog and adding a post");
+//    blog.Url = "https://devblogs.microsoft.com/dotnet";
+//    blog.Posts.Add(
+//        new Post { Title = "Hello World", Content = "I wrote an app using EF Core!" });
+//    db.SaveChanges();
 
-    //    // Delete
-    //    Console.WriteLine("Delete the blog");
-    //    db.Remove(blog);
-    //    db.SaveChanges();
-    //}
+//    // Delete
+//    Console.WriteLine("Delete the blog");
+//    db.Remove(blog);
+//    db.SaveChanges();
+//}
 
     static void seedTasks()
     {
@@ -70,3 +72,21 @@ using (ProjectManagerContext context = new())
         db.Add(brewCoffee);
         db.SaveChanges();
     }
+
+static void printIncompleteTasksAndTodos()
+{
+    Console.WriteLine("\n\nTasks not done yet");
+    using (var context = new ProjectManagerContext())
+    {
+        var tasks = context.Task.Include(task => task.Todos);
+        foreach (var task in tasks)
+        {
+            Console.WriteLine($"Task: {task.Name}");
+            var result = task.Todos.Where(todo => todo.IsComplete == false);
+            foreach (var todo in result)
+            {
+                Console.WriteLine($"-{todo.Name}");
+            }
+        }
+    }
+}
