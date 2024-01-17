@@ -11,6 +11,9 @@ namespace ProjectManager
     {
         public DbSet<ProjectManager.Task> Task { get; set; }
         public DbSet<Todo> Todo { get; set; }
+        public DbSet<Team> Team { get; set; }
+        public DbSet<Worker> Worker { get; set; }
+        public DbSet<TeamWorker> TeamWorker { get; set; }
 
         public string DbPath { get; }
 
@@ -25,6 +28,12 @@ namespace ProjectManager
         // special "local" folder for your platform.
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite($"Data Source={DbPath}");
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TeamWorker>()
+                .HasKey(o => new { o.TeamID, o.WorkerID });
+        }
     }
     public class Task
     {
@@ -32,15 +41,15 @@ namespace ProjectManager
         public string Name { get; set; }
         public List<Todo> Todos { get; set; }
 
-        public Task( string name, List<Todo> todos)
+        public Task(string name, List<Todo> todos)
         {
-           
+
             Name = name;
             Todos = todos;
         }
         public Task()
         {
-            
+
         }
     }
 
@@ -51,15 +60,37 @@ namespace ProjectManager
         public string Name { get; set; }
         public bool IsComplete { get; set; }
 
-        public Todo( string name, bool isComplete)
+        public Todo(string name, bool isComplete)
         {
             Name = name;
             IsComplete = isComplete;
         }
-    public Todo()
-    {
-        
+        public Todo()
+        {
+
+        }
     }
-}
+
+    public class Team
+    {
+        public int TeamID { get; set; }
+        public string Name { get; set; }
+        public List<TeamWorker> Workers { get; set; }
+    }
+
+    public class Worker
+    {
+        public int WorkerID { get; set; }
+        public string Name { get; set; }
+        public List<TeamWorker> Teams {  get; set; } 
+    }
+
+    public class TeamWorker
+    {
+        public int TeamID { get; set; }
+        public Team? team { get; set; }
+        public int WorkerID { get; set; }
+        public Worker Worker { get; set; }
+    }
 
 }

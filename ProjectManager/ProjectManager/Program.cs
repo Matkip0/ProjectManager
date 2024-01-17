@@ -20,6 +20,8 @@ using (ProjectManagerContext context = new())
 
 printIncompleteTasksAndTodos();
 
+seedWorkers();
+
     //static void Blogging() 
     //{ 
     //    using var db = new BloggingContext();
@@ -88,5 +90,37 @@ static void printIncompleteTasksAndTodos()
                 Console.WriteLine($"-{todo.Name}");
             }
         }
+    }
+}
+
+static void seedWorkers()
+{
+    using (var context = new ProjectManagerContext())
+    {
+        Console.WriteLine("Seeding Workers");
+        Team Frontend = new() { Name = "Frontend" };
+        Team Backend = new() { Name = "Backend" };
+        Team Testere = new() { Name = "Testere" };
+        Worker SteenSecher = new() { Name = "Steen Secher" };
+        Worker EjvindMøller = new() { Name = "Ejvind Møller" };
+        Worker KonradSommer = new() { Name = "Konrad Sommer" };
+        Worker SofusLotus = new() { Name = "Sofus Lotus" };
+        Worker RemoLademann = new() { Name = "Remo Lademann" };
+        Worker EllaFanth = new() { Name = "Ella Fanth" };
+        Worker AnneDam = new() { Name = "Anne Dam" };
+
+        //Frontend
+        context.TeamWorker.Add(new TeamWorker { team = Frontend, Worker = SteenSecher });
+        context.TeamWorker.Add(new TeamWorker { team = Frontend, Worker = EjvindMøller });
+        context.TeamWorker.Add(new TeamWorker { team = Frontend, Worker = KonradSommer });
+        //Backend
+        context.TeamWorker.Add(new TeamWorker { team = Backend, Worker = KonradSommer });
+        context.TeamWorker.Add(new TeamWorker { team = Backend, Worker = SofusLotus });
+        context.TeamWorker.Add(new TeamWorker { team = Backend, Worker = RemoLademann });
+        //Testere
+        context.TeamWorker.Add(new TeamWorker { team = Testere, Worker = EllaFanth });
+        context.TeamWorker.Add(new TeamWorker { team = Testere, Worker = AnneDam });
+        context.TeamWorker.Add(new TeamWorker { team = Testere, Worker = SteenSecher });
+        context.SaveChanges();
     }
 }
