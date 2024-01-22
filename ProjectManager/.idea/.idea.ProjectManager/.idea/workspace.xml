@@ -8,15 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8ab0caa-3880-44c4-8288-f591159732da" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/ProjectManager/Migrations/20240117094410_InitialCreate.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectManager/Migrations/20240117094410_InitialCreate.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectManager/Migrations/20240117131512_AddedGroupUser.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectManager/Migrations/20240117131512_AddedGroupUser.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectManager/Migrations/20240117134911_AddedTeamTasks.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectManager/Migrations/20240117134911_AddedTeamTasks.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectManager/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectManager/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectManager/Migrations/20240122113808_InitialCreate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectManager/Migrations/20240122113808_InitialCreate.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectManager/Migrations/ProjectManagerContextModelSnapshot.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectManager/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectManager/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectManager/Task.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectManager/Task.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1705914327408</updated>
       <workItem from="1705914328901" duration="1867000" />
-      <workItem from="1705916532617" duration="4133000" />
+      <workItem from="1705916532617" duration="7198000" />
     </task>
     <servers />
   </component>

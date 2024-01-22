@@ -6,22 +6,22 @@ using Task = System.Threading.Tasks.Task;
 
 
 //seedTasks();
-seedWorkers();
+//seedWorkers();
+PrintTeamsWithoutTasks();
 
-using (ProjectManagerContext context = new())
-{
-    var tasks = context.Task.Include(task => task.Todos);
-    foreach (var task in tasks)
-    {
-        Console.WriteLine($"Task: {task.Name}");
-        foreach(var todo in task.Todos)
-        {
-            Console.WriteLine($"-{todo.Name}");
-        }
-    }
-}
-
-printIncompleteTasksAndTodos();
+// using (ProjectManagerContext context = new())
+// {
+//     var tasks = context.Task.Include(task => task.Todos);
+//     foreach (var task in tasks)
+//     {
+//         Console.WriteLine($"Task: {task.Name}");
+//         foreach(var todo in task.Todos)
+//         {
+//             Console.WriteLine($"-{todo.Name}");
+//         }
+//     }
+// }
+//printIncompleteTasksAndTodos();
 
 
     //static void Blogging() 
@@ -109,7 +109,7 @@ static void seedWorkers()
 
         ProjectManager.Task frontendTask = new() { Name = "frontendTask", Todos = new List<Todo>() {frontendTodo, randomTodo } };
         ProjectManager.Task backendTask = new() { Name = "frontendTask", Todos = new List<Todo>() { backendTodo, randomTodo } };
-        ProjectManager.Task testerTask = new() { Name = "frontendTask", Todos = new List<Todo>() { testerTodo, randomTodo } };
+        ProjectManager.Task testerTask = new() { Name = "frontendTask" };
         
         Console.WriteLine("Seeding Workers");
         Team Frontend = new() { Name = "Frontend", CurrentTask = frontendTask};
@@ -137,4 +137,22 @@ static void seedWorkers()
         context.TeamWorker.Add(new TeamWorker { team = Testere, Worker = SteenSecher });
         context.SaveChanges();
     }
+}
+
+static List<Team> PrintTeamsWithoutTasks()
+{
+    List<Team> resultTeams = new();
+    Console.WriteLine("Teams doing nothing:");
+    using (var context = new ProjectManagerContext())
+    {
+        var teams = context.Team.Where(team => team.CurrentTask == null);
+        
+        foreach (var team in teams)
+        {
+            resultTeams.Add(team);
+            Console.WriteLine(team.Name);
+        }
+    }
+
+    return resultTeams;
 }
