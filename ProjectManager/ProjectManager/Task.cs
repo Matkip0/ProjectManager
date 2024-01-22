@@ -33,6 +33,7 @@ namespace ProjectManager
         {
             modelBuilder.Entity<TeamWorker>()
                 .HasKey(o => new { o.TeamID, o.WorkerID });
+            modelBuilder.Entity<Worker>().HasOne<Todo>().WithMany().IsRequired(false);
         }
     }
     public class Task
@@ -76,8 +77,8 @@ namespace ProjectManager
         public int TeamID { get; set; }
         public string Name { get; set; }
         public List<TeamWorker> Workers { get; set; }
-        public Task CurrentTask { get; set; }
-        public List<Task> Tasks { get; set; }
+        public Task? CurrentTask { get; set; }
+        public List<Task>? Tasks { get; set; }
     }
 
     public class Worker
@@ -85,8 +86,8 @@ namespace ProjectManager
         public int WorkerID { get; set; }
         public string Name { get; set; }
         public List<TeamWorker> Teams {  get; set; }
-        public Todo CurrentTodo { get; set; }
-        public List<Todo> Todos { get; set; }
+        public Todo? CurrentTodo { get; set; }
+        public List<Todo>? Todos { get; set; }
     }
 
     public class TeamWorker

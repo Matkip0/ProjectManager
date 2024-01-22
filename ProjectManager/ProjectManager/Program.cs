@@ -2,9 +2,11 @@
 using ProjectManager;
 using System;
 using System.Linq;
+using Task = System.Threading.Tasks.Task;
+
 
 //seedTasks();
-//seedWorkers();
+seedWorkers();
 
 using (ProjectManagerContext context = new())
 {
@@ -97,17 +99,29 @@ static void seedWorkers()
 {
     using (var context = new ProjectManagerContext())
     {
+        Console.WriteLine($"Database path: {context.DbPath}.");
+
+        Todo frontendTodo = new() { Name = "Do Frontend stuff", IsComplete = false };
+        Todo backendTodo = new() { Name = "Do backend stuff", IsComplete = false };
+        Todo testerTodo = new() { Name = "Do test stuff", IsComplete = false };
+        Todo randomTodo = new() { Name = "idk do stuff", IsComplete = false };
+
+
+        ProjectManager.Task frontendTask = new() { Name = "frontendTask", Todos = new List<Todo>() {frontendTodo, randomTodo } };
+        ProjectManager.Task backendTask = new() { Name = "frontendTask", Todos = new List<Todo>() { backendTodo, randomTodo } };
+        ProjectManager.Task testerTask = new() { Name = "frontendTask", Todos = new List<Todo>() { testerTodo, randomTodo } };
+        
         Console.WriteLine("Seeding Workers");
-        Team Frontend = new() { Name = "Frontend" };
-        Team Backend = new() { Name = "Backend" };
-        Team Testere = new() { Name = "Testere" };
-        Worker SteenSecher = new() { Name = "Steen Secher" };
-        Worker EjvindMøller = new() { Name = "Ejvind Møller" };
-        Worker KonradSommer = new() { Name = "Konrad Sommer" };
-        Worker SofusLotus = new() { Name = "Sofus Lotus" };
-        Worker RemoLademann = new() { Name = "Remo Lademann" };
-        Worker EllaFanth = new() { Name = "Ella Fanth" };
-        Worker AnneDam = new() { Name = "Anne Dam" };
+        Team Frontend = new() { Name = "Frontend", CurrentTask = frontendTask};
+        Team Backend = new() { Name = "Backend", CurrentTask = backendTask};
+        Team Testere = new() { Name = "Testere", CurrentTask = testerTask};
+        Worker SteenSecher = new() { Name = "Steen Secher", CurrentTodo = frontendTodo};
+        Worker EjvindMøller = new() { Name = "Ejvind Møller", CurrentTodo = frontendTodo };
+        Worker KonradSommer = new() { Name = "Konrad Sommer", CurrentTodo = frontendTodo };
+        Worker SofusLotus = new() { Name = "Sofus Lotus", CurrentTodo = backendTodo };
+        Worker RemoLademann = new() { Name = "Remo Lademann", CurrentTodo = backendTodo };
+        Worker EllaFanth = new() { Name = "Ella Fanth", CurrentTodo = testerTodo };
+        Worker AnneDam = new() { Name = "Anne Dam", CurrentTodo = testerTodo };
 
         //Frontend
         context.TeamWorker.Add(new TeamWorker { team = Frontend, Worker = SteenSecher });
